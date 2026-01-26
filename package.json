@@ -8,5 +8,28 @@
   "license": "MIT",
   "keywords": ["react-native", "react-component"],
   "main": "index",
-  "author": "Yonah Forst <yonaforst@hotmail.com>"
+  "author": "Yonah Forst <yonaforst@hotmail.com>",
+  "peerDependencies": {
+    "react-native": ">=0.71"
+  },
+  "devDependencies": {
+    "react-native": "0.81.5"
+  },
+  "codegenConfig": {
+    "name": "ReactNativeHeadingSpec",
+    "type": "modules",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "com.joshblour.reactnativeheading"
+    },
+    "ios": {
+      "modules": {
+        "ReactNativeHeading": {
+          "className": "ReactNativeHeading"
+        }
+      }
+    }
+  }
+
+
 }

@@ -15,13 +15,11 @@ import android.util.Log;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.joshblour.discovery.BLEUser;
-import com.joshblour.discovery.Discovery;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -30,14 +28,17 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import com.joshblour.reactnativeheading.NativeReactNativeHeadingSpec;
 
-public class ReactNativeHeadingModule extends ReactContextBaseJavaModule implements SensorEventListener {
+@ReactModule(name = ReactNativeHeadingModule.NAME)
+public class ReactNativeHeadingModule extends NativeReactNativeHeadingSpec implements SensorEventListener {
 
+    public static final String NAME = "ReactNativeHeading";
 
     private static Context mApplicationContext;
     private int mAzimuth = 0; // degree
     private int newAzimuth = 0; // degree
-    private float mFilter = 5;
+    private double mFilter = 5;
     private SensorManager mSensorManager;
     private Sensor mSensor;
     private float[] orientation = new float[3];
@@ -50,14 +51,11 @@ public class ReactNativeHeadingModule extends ReactContextBaseJavaModule impleme
 
     @Override
     public String getName() {
-        return "ReactNativeHeading";
+        return NAME;
     }
 
-
-
-
     @ReactMethod
-    public void start(int filter, Promise promise) {
+    public void start(double filter, Promise promise) {
 
         if (mSensorManager == null) {
             mSensorManager = (SensorManager) mApplicationContext.getSystemService(Context.SENSOR_SERVICE);
@@ -76,6 +74,13 @@ public class ReactNativeHeadingModule extends ReactContextBaseJavaModule impleme
     public void stop() {
         mSensorManager.unregisterListener(this);
     }
+
+    @Override
+    public void addListener(String eventName) { }
+
+    @Override
+    public void removeListeners(double count) { }
+
 
     @Override
     public void onSensorChanged(SensorEvent event) {
