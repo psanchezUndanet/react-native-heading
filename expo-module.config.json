@@ -1,0 +1,10 @@
+{
+  "name": "react-native-heading",
+  "platforms": ["ios", "android"],
+  "ios": {
+    "modules": ["ReactNativeHeading"]
+  },
+  "android": {
+    "modules": ["com.joshblour.reactnativeheading.ReactNativeHeading"]
+  }
+}
